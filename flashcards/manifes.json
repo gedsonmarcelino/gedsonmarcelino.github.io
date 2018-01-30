@@ -1,0 +1,10 @@
+{
+    "name": "VueJS Flash Cards",
+    "short_name": "Flash Cards",
+    "description": "Sample application created using VueJS and Firestore.",
+    "lang": "en-US",
+    "start_url": "http://gedsonmarcelino.me/flashcards/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#117298"
+  }
