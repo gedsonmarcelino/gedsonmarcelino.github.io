@@ -52,6 +52,31 @@
     .row>span#wrong {
       color: var(--tertiary-color);
     }
+
+    button {
+      min-width: 30px;
+      min-height: 30px;
+      padding: 8px;
+      font-size: 15px;
+      border: none;
+      border-radius: 10px;
+      background-color: var(--quaternary-color);
+      color: white;
+      margin-right: 5px;
+    }
+
+    button.reset {
+      padding: 8px 12px;
+      background-color: var(--tertiary-color);
+    }
+
+    button:hover {
+      filter: opacity(0.8);
+    }
+
+    button:active {
+      filter: opacity(0.9);
+    }
   </style>
 
 </head>
@@ -73,7 +98,7 @@
     <div class="row">
       <label>Total:</label>
       <span id="total">0</span>
-      <button onclick="actionReset()">Reset</button>
+      <button class="reset" onclick="actionReset()">Reset</button>
     </div>
   </div>
 
@@ -107,12 +132,14 @@
     }
 
     function actionReset() {
-      right = wrong = total = 0;
-      document.getElementById("right").innerHTML = right;
-      document.getElementById("wrong").innerHTML = wrong;
-      document.getElementById("total").innerHTML = total;
-      window.localStorage.setItem("wrong", wrong)
-      window.localStorage.setItem("right", right)
+      if (window.confirm("Are you sure you want to reset?")) {
+        right = wrong = total = 0;
+        document.getElementById("right").innerHTML = right;
+        document.getElementById("wrong").innerHTML = wrong;
+        document.getElementById("total").innerHTML = total;
+        window.localStorage.setItem("wrong", wrong)
+        window.localStorage.setItem("right", right)
+      }
     }
   </script>
 
