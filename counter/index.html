@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Counter</title>
+  <style>
+    :root {
+      --background-color: #F1F5F0;
+      --primary-color: #265699;
+      --secondary-color: #579936;
+      --tertiary-color: #2B4D1B;
+      --quaternary-color: #132B4D;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--background-color);
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      font-size: 36px;
+    }
+
+    .row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .row>label {
+      text-align: right;
+      min-width: 200px;
+      margin-right: 10px;
+    }
+
+    .row>span {
+      margin-right: 10px;
+    }
+
+    .row>span#right {
+      color: var(--secondary-color);
+    }
+
+    .row>span#wrong {
+      color: var(--tertiary-color);
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <label>Right:</label>
+      <span id="right">0</span>
+      <button onclick="count('+','right')">+</button>
+      <button onclick="count('-','right')">-</button>
+    </div>
+    <div class="row">
+      <label>Wrong:</label>
+      <span id="wrong">0</span>
+      <button onclick="count('+','wrong')">+</button>
+      <button onclick="count('-','wrong')">-</button>
+    </div>
+    <div class="row">
+      <label>Total:</label>
+      <span id="total">0</span>
+      <button onclick="actionReset()">Reset</button>
+    </div>
+  </div>
+
+  <script>
+    var right = 0;
+    var wrong = 0;
+
+    window.onload = function () {
+      window.localStorage.getItem("right") && (right = parseInt(window.localStorage.getItem("right")))
+      window.localStorage.getItem("wrong") && (wrong = parseInt(window.localStorage.getItem("wrong")))
+      document.getElementById("right").innerHTML = right;
+      document.getElementById("wrong").innerHTML = wrong;
+      updateTotal();
+    }
+
+    function count(action, type) {
+      if (type === "right") {
+        right = action === "+" ? right + 1 : right - 1;
+        document.getElementById(type).innerHTML = right;
+        window.localStorage.setItem("right", right)
+      } else {
+        wrong = action === "+" ? wrong + 1 : wrong - 1;
+        document.getElementById(type).innerHTML = wrong;
+        window.localStorage.setItem("wrong", wrong)
+      }
+      updateTotal();
+    }
+
+    function updateTotal() {
+      document.getElementById("total").innerHTML = right + wrong;
+    }
+
+    function actionReset() {
+      right = wrong = total = 0;
+      document.getElementById("right").innerHTML = right;
+      document.getElementById("wrong").innerHTML = wrong;
+      document.getElementById("total").innerHTML = total;
+      window.localStorage.setItem("wrong", wrong)
+      window.localStorage.setItem("right", right)
+    }
+  </script>
+
+</body>
+
+</html>
